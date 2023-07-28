@@ -1,6 +1,6 @@
 import { BaseFilter, Item } from "https://deno.land/x/ddc_vim@v3.9.1/types.ts";
 
-type Params = { regexp: string };
+type Params = { regexp: string, flags: string | undefined };
 
 export class Filter extends BaseFilter<Params> {
   override filter(args: {
@@ -11,7 +11,7 @@ export class Filter extends BaseFilter<Params> {
     if (args.filterParams.regexp == "") {
       return Promise.resolve(args.items);
     }
-    const re = new RegExp(args.filterParams.regexp);
+    const re = new RegExp(args.filterParams.regexp, args.filterParams.flags);
     return Promise.resolve(args.items.map((item) => {
       item.abbr = item.abbr ?? item.word;
       const matches = item.word.match(re) ?? [];
@@ -21,6 +21,6 @@ export class Filter extends BaseFilter<Params> {
   }
 
   override params(): Params {
-    return { regexp: "" };
+    return { regexp: "", flags: undefined };
   }
 }
