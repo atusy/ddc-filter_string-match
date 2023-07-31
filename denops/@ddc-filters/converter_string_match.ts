@@ -13,10 +13,12 @@ export class Filter extends BaseFilter<Params> {
     }
     const re = new RegExp(args.filterParams.regexp, args.filterParams.flags);
     return Promise.resolve(args.items.map((item) => {
-      item.abbr = item.abbr ?? item.word;
-      const matches = item.word.match(re) ?? [];
-      item.word = matches[0] ?? item.word;
-      return item
+      // const newItem = { ...item }
+      const newItem = JSON.parse(JSON.stringify(item));
+      newItem.abbr = newItem.abbr ?? newItem.word;
+      const matches = newItem.word.match(re) ?? [];
+      newItem.word = matches[0] ?? newItem.word;
+      return newItem
     }));
   }
 
