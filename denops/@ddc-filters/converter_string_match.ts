@@ -1,4 +1,4 @@
-import { BaseFilter, Item } from "https://deno.land/x/ddc_vim@v3.9.1/types.ts";
+import { BaseFilter, type Item } from "jsr:@shougo/ddc-vim@~9.1.0/filter";
 
 type Params = { regexp: string, flags: string | undefined, convertAbbr: boolean };
 
