@@ -1,6 +1,10 @@
 import { BaseFilter, type Item } from "jsr:@shougo/ddc-vim@~9.1.0/filter";
 
-type Params = { regexp: string, flags: string | undefined, convertAbbr: boolean };
+type Params = {
+  regexp: string;
+  flags: string | undefined;
+  convertAbbr: boolean;
+};
 
 export class Filter extends BaseFilter<Params> {
   override filter(args: {
@@ -21,7 +25,7 @@ export class Filter extends BaseFilter<Params> {
       } else if (item.abbr == null) {
         item.abbr = word;
       }
-      return item
+      return item;
     }));
   }
 
