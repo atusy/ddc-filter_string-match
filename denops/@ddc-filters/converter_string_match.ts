@@ -3,6 +3,7 @@ import { BaseFilter } from "jsr:@shougo/ddc-vim@~9.1.0/filter";
 
 type Params = {
   regexp: string;
+  captures: number[];
   flags: string | undefined;
   convertAbbr: boolean;
 };
@@ -20,7 +21,12 @@ export class Filter extends BaseFilter<Params> {
     return Promise.resolve(args.items.map((item) => {
       const word = item.word;
       const matches = word.match(re) ?? [];
-      item.word = matches[0] ?? item.word;
+      for (const cap of args.filterParams.captures) {
+        if (matches[cap]) {
+          item.word = matches[cap];
+          break;
+        }
+      }
       if (args.filterParams.convertAbbr) {
         item.abbr = item.word;
       } else if (item.abbr == null) {
@@ -31,6 +37,12 @@ export class Filter extends BaseFilter<Params> {
   }
 
   override params(): Params {
-    return { regexp: "", flags: undefined, convertAbbr: false };
+    return {
+      regexp: "",
+      captures: [0],
+      flags: undefined,
+      convertAbbr: false,
+    };
   }
 }
+
