@@ -1,4 +1,5 @@
-import { BaseFilter, type Item } from "jsr:@shougo/ddc-vim@~9.1.0/filter";
+import { type Item } from "jsr:@shougo/ddc-vim@~9.1.0/types";
+import { BaseFilter } from "jsr:@shougo/ddc-vim@~9.1.0/filter";
 
 type Params = {
   regexp: string;
