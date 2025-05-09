@@ -65,6 +65,12 @@ regexp		(string)
 flags		(string)
 		A flag of the regular expression.
 
+captures	(number[])
+		A list of capture groups to be used for replacement.
+		The first available group has the priority.
+
+		Default: [0]
+
 convertAbbr	(boolean)
 		Whether or not to convert the item abbreviation as well.
 
